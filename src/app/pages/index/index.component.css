@@ -1,0 +1,33 @@
+
+/* Estilos Botón de Seguimiento */
+
+.contenedor-boton {
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+    margin-bottom: 130px;
+}
+
+.btn-seguimiento {
+    display: inline-block;
+    padding: 14px 35px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #ffffff;
+    background: linear-gradient(135deg, #7a1840, #611232);
+    border-radius: 90px;
+    box-shadow: 0 8px 20px rgba(97, 18, 50, 0.35);
+    transition: all 0.3s ease;
+}
+
+.btn-seguimiento:hover {
+    background: linear-gradient(135deg, #611232, #470c24);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(97, 18, 50, 0.45);
+}
+
+.btn-seguimiento:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 15px rgba(97, 18, 50, 0.35);
+}

@@ -1,0 +1,144 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.form-container {
+  max-width: 850px;
+  margin: auto;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #1e293b;
+}
+
+.form-section {
+  margin-bottom: 40px;
+  padding: 25px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.form-section h2 {
+  margin-bottom: 20px;
+  color: #334155;
+  font-size: 18px;
+  border-left: 4px solid #2563eb;
+  padding-left: 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #475569;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+input:focus, select:focus {
+  border-color: #2563eb;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+.radio-group {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.radio-group label {
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn-submit:hover {
+  background: #1d4ed8;
+}
+
+/* Radio vertical */
+.radio-group.vertical {
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Escala de satisfacción */
+.satisfaction-scale {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.satisfaction-scale label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: normal;
+  cursor: pointer;
+  background: #e2e8f0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.satisfaction-scale input {
+  margin-bottom: 5px;
+}
+
+.satisfaction-scale label:hover {
+  background: #2563eb;
+  color: white;
+}
+
+/* Checkbox group */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkbox-group label {
+  display: flex;
+  gap: 8px;
+  font-weight: normal;
+  cursor: pointer;
+}
