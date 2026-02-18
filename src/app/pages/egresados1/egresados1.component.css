@@ -1,144 +1,184 @@
-
+/* ===== RESET ===== */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
+/* ===== FONDO INSTITUCIONAL ===== */
+body {
+  background: linear-gradient(135deg, #7a1f2b, #4d111a);
+  padding: 60px 20px;
+  min-height: 100vh;
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
 .form-container {
-  max-width: 850px;
+  max-width: 950px;
   margin: auto;
-  background: #ffffff;
-  padding: 40px;
-  border-radius: 14px;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+  padding: 50px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+  color: #000;
 }
 
+/* ===== TITULO PRINCIPAL ===== */
 h1 {
   text-align: center;
-  margin-bottom: 30px;
-  color: #1e293b;
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 50px;
+  letter-spacing: 1px;
+  color: #000;
 }
 
+/* ===== SECCIONES ===== */
 .form-section {
-  margin-bottom: 40px;
-  padding: 25px;
-  border-radius: 10px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  margin-bottom: 50px;
+  padding: 30px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: 0.3s ease;
 }
 
+.form-section:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+/* ===== TITULO SECCION ===== */
 .form-section h2 {
-  margin-bottom: 20px;
-  color: #334155;
-  font-size: 18px;
-  border-left: 4px solid #2563eb;
-  padding-left: 10px;
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  font-weight: 500;
+  color: #7a1f2b;
 }
 
+/* ===== FORM GROUP ===== */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
+/* ===== LABEL ===== */
 label {
   display: block;
   margin-bottom: 8px;
-  font-weight: 500;
-  color: #475569;
+  font-size: 16px;
+  color: #000;
+  font-weight: 400;
 }
 
+/* ===== INPUTS Y SELECT ===== */
+/* ===== INPUTS Y SELECT MODERNOS NEGROS ===== */
+/* ===== INPUTS Y SELECT ESTILO MODERNO BLANCO ===== */
 input, select {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: 1px solid #cbd5e1;
-  transition: all 0.3s ease;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 2px solid #000;   /* Contorno negro */
+  background: #fff;         /* Fondo blanco */
+  color: #000;              /* Texto negro */
   font-size: 14px;
-}
-
-input:focus, select:focus {
-  border-color: #2563eb;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+  transition: all 0.25s ease;
 }
 
-.radio-group {
+/* Placeholder más sutil */
+input::placeholder {
+  color: rgba(0,0,0,0.4);
+}
+
+/* Focus elegante institucional */
+input:focus, 
+select:focus {
+  border: 2px solid #7a1f2b;  /* Rojo institucional ITD */
+  box-shadow: 0 0 0 3px rgba(122,31,43,0.15);
+}
+
+/* Select limpio */
+select {
+  appearance: none;
+  background-color: #fff;
+}
+
+
+/* ===== RADIO & CHECK PERSONALIZADOS ===== */
+.radio-group,
+.checkbox-group {
   display: flex;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 12px;
 }
 
-.radio-group label {
-  font-weight: normal;
+.radio-group label,
+.checkbox-group label {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-size: 13px;
+}
+
+.radio-group input,
+.checkbox-group input {
+  accent-color: #ff9aa6;
   cursor: pointer;
 }
 
+.radio-group label:hover,
+.checkbox-group label:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ===== ESCALA SATISFACCION ===== */
+.satisfaction-scale {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.satisfaction-scale label {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+
+.satisfaction-scale label:hover {
+  background: #ff9aa6;
+  color: #4d111a;
+}
+
+/* ===== BOTON ===== */
 .btn-submit {
   width: 100%;
-  padding: 14px;
-  background: #2563eb;
-  color: white;
+  padding: 16px;
+  margin-top: 30px;
+  border-radius: 14px;
   border: none;
-  border-radius: 10px;
+  background: linear-gradient(90deg, #ff9aa6, #ff5e73);
+  color: #4d111a;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
 .btn-submit:hover {
-  background: #1d4ed8;
-}
-
-/* Radio vertical */
-.radio-group.vertical {
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* Escala de satisfacción */
-.satisfaction-scale {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-.satisfaction-scale label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-weight: normal;
-  cursor: pointer;
-  background: #e2e8f0;
-  padding: 10px 14px;
-  border-radius: 8px;
-  transition: 0.3s ease;
-}
-
-.satisfaction-scale input {
-  margin-bottom: 5px;
-}
-
-.satisfaction-scale label:hover {
-  background: #2563eb;
-  color: white;
-}
-
-/* Checkbox group */
-.checkbox-group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.checkbox-group label {
-  display: flex;
-  gap: 8px;
-  font-weight: normal;
-  cursor: pointer;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
