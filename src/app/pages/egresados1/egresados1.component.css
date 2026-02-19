@@ -1,12 +1,10 @@
-/* ===== RESET ===== */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
 }
 
-/* ===== FONDO INSTITUCIONAL ===== */
 body {
   background: linear-gradient(135deg, #7a1f2b, #4d111a);
   padding: 60px 20px;
@@ -21,11 +19,11 @@ body {
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(18px);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
   color: #000;
+  margin-bottom: 70px;
 }
 
-/* ===== TITULO PRINCIPAL ===== */
 h1 {
   text-align: center;
   font-size: 2.2rem;
@@ -37,148 +35,178 @@ h1 {
 
 /* ===== SECCIONES ===== */
 .form-section {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   padding: 30px;
   border-radius: 16px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   transition: 0.3s ease;
 }
 
 .form-section:hover {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* ===== TITULO SECCION ===== */
 .form-section h2 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin-bottom: 25px;
   font-weight: 500;
-  color: #7a1f2b;
+  color: #611232;
 }
 
-/* ===== FORM GROUP ===== */
 .form-group {
   margin-bottom: 25px;
 }
 
-/* ===== LABEL ===== */
 label {
   display: block;
   margin-bottom: 8px;
-  font-size: 16px;
+  font-size: 18px;
   color: #000;
   font-weight: 400;
 }
 
-/* ===== INPUTS Y SELECT ===== */
-/* ===== INPUTS Y SELECT MODERNOS NEGROS ===== */
 /* ===== INPUTS Y SELECT ESTILO MODERNO BLANCO ===== */
-input, select {
+input,
+select {
   width: 100%;
   padding: 14px 16px;
   border-radius: 12px;
-  border: 2px solid #000;   /* Contorno negro */
-  background: #fff;         /* Fondo blanco */
-  color: #000;              /* Texto negro */
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
   font-size: 14px;
   outline: none;
-  transition: all 0.25s ease;
 }
 
-/* Placeholder más sutil */
-input::placeholder {
-  color: rgba(0,0,0,0.4);
-}
-
-/* Focus elegante institucional */
-input:focus, 
+input:focus,
 select:focus {
-  border: 2px solid #7a1f2b;  /* Rojo institucional ITD */
-  box-shadow: 0 0 0 3px rgba(122,31,43,0.15);
+  border: 1px solid #7a1f2b;
 }
 
-/* Select limpio */
 select {
   appearance: none;
   background-color: #fff;
 }
 
-
-/* ===== RADIO & CHECK PERSONALIZADOS ===== */
-.radio-group,
-.checkbox-group {
+/* ===== RADIO PERSONALIZADO ===== */
+.radio-group {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 0px;
 }
 
-.radio-group label,
-.checkbox-group label {
-  display: flex;
+.radio-group label {
+  display: grid;
+  grid-template-columns: 20px 1fr;
   align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: 30px;
-  background: rgba(255,255,255,0.1);
+  gap: 0px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
   cursor: pointer;
   transition: 0.3s ease;
-  font-size: 13px;
+  font-size: 15px;
+  width: 100%;
 }
 
-.radio-group input,
-.checkbox-group input {
-  accent-color: #ff9aa6;
+.radio-group input {
+  accent-color: #000;
+}
+
+.radio-group label:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== CHECKBOX PERSONALIZADO PROFESIONAL ===== */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.checkbox-group label {
+  display: grid; 
+  grid-template-columns: 22px 1fr;
+  align-items: start;
+  gap: 12px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.08);
   cursor: pointer;
+  transition: 0.3s ease;
+  font-size: 15px;
+  line-height: 1.5;
+  width: 100%;   
 }
 
-.radio-group label:hover,
+.checkbox-group input {
+  margin-top: 3px;         
+  accent-color: #611232;
+}
+
 .checkbox-group label:hover {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* ===== ESCALA SATISFACCION ===== */
 .satisfaction-scale {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-top: 10px;
+  align-items: center;
+  gap: 18px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.satisfaction-scale span {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .satisfaction-scale label {
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: 0.3s ease;
-  font-weight: 500;
-}
-
-.satisfaction-scale label:hover {
-  background: #ff9aa6;
-  color: #4d111a;
+  font-weight: 400;
 }
 
 /* ===== BOTON ===== */
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
 .btn-submit {
-  width: 100%;
-  padding: 16px;
-  margin-top: 30px;
-  border-radius: 14px;
-  border: none;
-  background: linear-gradient(90deg, #ff9aa6, #ff5e73);
-  color: #4d111a;
-  font-size: 16px;
+  display: inline-block;
+  padding: 14px 35px;
+  font-size: 1rem;
   font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s ease;
+  text-decoration: none;
+  color: #ffffff;
+  background: linear-gradient(135deg, #7a1840, #611232);
+  border-radius: 90px;
+  box-shadow: 0 8px 20px rgba(97, 18, 50, 0.35);
+  transition: all 0.3s ease;
 }
 
 .btn-submit:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg, #611232, #470c24);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(97, 18, 50, 0.45);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 15px rgba(97, 18, 50, 0.35);
 }
