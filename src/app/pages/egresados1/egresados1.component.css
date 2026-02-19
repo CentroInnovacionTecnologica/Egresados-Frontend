@@ -143,7 +143,7 @@ select {
 
 .checkbox-group input {
   margin-top: 3px;         
-  accent-color: #611232;
+  accent-color: #000;
 }
 
 .checkbox-group label:hover {
