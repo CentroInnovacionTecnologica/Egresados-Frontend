@@ -94,7 +94,7 @@ select {
 .radio-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0px;
   margin-top: 0px;
 }
 
@@ -124,7 +124,7 @@ select {
 .checkbox-group {
   display: flex;
   flex-direction: column;
-  gap: 0px;
+  gap: 6px;
 }
 
 .checkbox-group label {
@@ -132,7 +132,7 @@ select {
   grid-template-columns: 22px 1fr;
   align-items: start;
   gap: 12px;
-  padding: 14px 18px;
+  padding: 8px 16px;
   background: rgba(255, 255, 255, 0.08);
   cursor: pointer;
   transition: 0.3s ease;
