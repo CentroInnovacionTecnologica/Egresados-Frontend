@@ -1,1 +1,113 @@
-<p>egresados2 works!</p>
+<app-navbar></app-navbar>
+
+
+<!-- Primera Etapa Seguimiento -->
+<div class="form-container">
+    <h1>Seguimiento de Egresados</h1>
+
+    <form>
+
+        <!-- SECCIÓN 1 -->
+        <section class="form-section">
+            <h2>Sección 1. Validación de Identidad</h2>
+
+            <div class="form-group">
+                <label>1. Correo Electrónico Personal: (Debe ser el mismo registrado en la Etapa 1).</label>
+                <input type="text" required>
+            </div>
+
+            <div class="form-group">
+                <label>2. Nombre Completo: (Empezando por Apellidos).</label>
+                <input type="text" required>
+            </div>
+
+            <div class="form-group">
+                <label>3. Número de Control: Nota: Si no lo recuerdas, pon "Desconocido".</label>
+                <input type="text" required>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2 -->
+        <section class="form-section">
+            <h2>Sección 2. Detalle Profesional y Académico</h2>
+
+            <div class="form-group">
+                <label>4. Enlace a tu perfil de LinkedIn:</label>
+                <input type="text" required>
+            </div>
+
+            <div class="form-group">
+                <label>5. Puesto específico que desempeñas:</label>
+                <input type="text" required>
+            </div>
+
+            <div class="form-group">
+                <label>6. Coincidencia Laboral:
+                    ¿Qué tanto coincide tu trabajo con tu carrera?
+                </label>
+                <div class="radio-group">
+                    <label><input type="radio" name="ingles"> Poco</label>
+                    <label><input type="radio" name="ingles"> Nada</label>
+                    <label><input type="radio" name="ingles"> Mucho</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>7. Certificaciones o Posgrados específicos (nombres):</label>
+                <input type="text" required>
+            </div>
+
+        </section>
+
+        <!-- SECCIÓN 3 -->
+        <section class="form-section">
+            <h2>Sección 3. Tu opinión experta: Mejora Continua</h2>
+
+            <div class="form-group">
+                <label>8. Habilidades a reforzar. ¿Qué habilidades consideras que el ITD debería reforzar en sus planes
+                    de estudio? </label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox"> Dominio del idioma inglés</label>
+                    <label><input type="checkbox"> Habilidades blandas (Liderazgo, Comunicación efectiva, Trabajo en
+                        equipo, Inteligencia emocional)</label>
+                    <label><input type="checkbox"> Uso de Software especializado y herramientas digitales
+                        actuales</label>
+                    <label><input type="checkbox"> Gestión de Proyectos y metodologías ágiles</label>
+                    <label><input type="checkbox"> Emprendimiento, Innovación y plan de negocios</label>
+                    <label><input type="checkbox"> Vinculación práctica (Visitas industriales y casos reales)</label>
+                    <label><input type="checkbox"> Normatividad y Legislación aplicable a la carrera</label>
+                    <label><input type="checkbox"> Ciencia de Datos y Análisis de información</label>
+                    <label><input type="checkbox"> Otro:</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label> 9. Interés en Colaborar </label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox"> Participar en la revisión y actualización de los planes de estudio
+                        (Mesas de trabajo)</label>
+                    <label><input type="checkbox"> Impartir pláticas, conferencias o talleres a estudiantes</label>
+                    <label><input type="checkbox"> Apoyar como asesor externo en Residencias Profesionales o
+                        proyectos</label>
+                    <label><input type="checkbox"> Colaborar con el Patronato o Fundación ITD en iniciativas de apoyo
+                        (Becas, equipamiento o infraestructura).
+                    </label>
+                    <label><input type="checkbox"> Vincular a mi empresa con el ITD (Bolsa de trabajo, visitas,
+                        convenios)</label>
+                    <label><input type="checkbox"> Responder encuestas de opinión específicas sobre mi área
+                    </label>
+                    <label><input type="checkbox"> Por el momento no me es posible participar
+                    </label>
+                    <label><input type="checkbox"> Otro:</label>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Botón de envío -->
+        <div class="btn-container">
+            <button type="submit" class="btn-submit">Enviar y Continuar</button>
+        </div>
+
+    </form>
+</div>
