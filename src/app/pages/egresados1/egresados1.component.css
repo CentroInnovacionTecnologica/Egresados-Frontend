@@ -13,6 +13,7 @@ body {
 
 /* ===== CONTENEDOR PRINCIPAL ===== */
 .form-container {
+  width: 100%;
   max-width: 950px;
   margin: auto;
   padding: 50px;
@@ -218,4 +219,145 @@ select {
 .btn-submit:active {
   transform: translateY(0);
   box-shadow: 0 6px 15px rgba(97, 18, 50, 0.35);
+}
+
+/* ============================= */
+/* ===== RESPONSIVE DESIGN ===== */
+/* ============================= */
+
+/* 🔹 PANTALLAS GRANDES */
+@media (min-width: 1200px) {
+  .form-container {
+    max-width: 1000px;
+  }
+}
+
+/* 🔹 LAPTOPS Y TABLETS HORIZONTALES */
+@media (max-width: 992px) {
+
+  body {
+    padding: 40px 15px;
+  }
+
+  .form-container {
+    padding: 35px;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+  }
+
+  h3 {
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+  }
+}
+
+/* 🔹 TABLETS VERTICALES */
+@media (max-width: 768px) {
+
+  body {
+    padding: 30px 12px;
+  }
+
+  .form-container {
+    padding: 25px;
+    border-radius: 16px;
+  }
+
+  .form-section {
+    padding: 20px;
+  }
+
+  label {
+    font-size: 16px;
+  }
+
+  input,
+  select {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .satisfaction-scale {
+    gap: 12px;
+  }
+
+  .satisfaction-scale label {
+    width: 40px;
+    height: 40px;
+  }
+
+}
+
+/* 🔹 CELULARES GRANDES */
+@media (max-width: 576px) {
+
+  body {
+    padding: 25px 10px;
+  }
+
+  .form-container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+  }
+
+  .form-section {
+    padding: 18px;
+  }
+
+  .radio-group label,
+  .checkbox-group label {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .satisfaction-scale {
+    gap: 10px;
+  }
+
+  .satisfaction-scale label {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 14px;
+  }
+
+}
+
+/* 🔹 CELULARES PEQUEÑOS */
+@media (max-width: 400px) {
+
+  .form-container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  .form-section h2 {
+    font-size: 1.1rem;
+  }
+
+  input,
+  select {
+    font-size: 13px;
+  }
+
 }
