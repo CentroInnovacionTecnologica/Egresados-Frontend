@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { NavbarComponent } from "../../components/navbar/navbar.component";
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-egresados2',
-  imports: [NavbarComponent],
+  imports: [],
   templateUrl: './egresados2.component.html',
-  styleUrl: './egresados2.component.css'
+  styleUrls: ['./egresados2.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class Egresados2Component {
 
