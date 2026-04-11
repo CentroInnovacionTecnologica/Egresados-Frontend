@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
-import { NavbarComponent } from "../../components/navbar/navbar.component";
-import { PresentacionComponent } from "../../components/presentacion/presentacion.component";
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-index',
-  imports: [NavbarComponent, PresentacionComponent],
+  imports: [],
   templateUrl: './index.component.html',
-  styleUrl: './index.component.css'
+  styleUrls: ['./index.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class IndexComponent {
 
