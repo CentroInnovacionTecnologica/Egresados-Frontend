@@ -677,3 +677,171 @@ input:hover:not(:focus) {
     flex-direction: row;
   }
 }
+
+/* ── CHECK-BOX CUSTOM (ícono SVG dentro del cuadro) ── */
+.checkbox-option {
+  position: relative;
+}
+.checkbox-option input[type="checkbox"],
+.checkbox-option input[type="radio"] {
+  display: none;
+}
+.checkbox-option label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 18px;
+  border: 1.5px solid var(--gris-l);
+  border-radius: 12px;
+  background: var(--gris-f);
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--texto);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  user-select: none;
+  line-height: 1.45;
+}
+.check-box {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 2px solid var(--gris-l);
+  border-radius: 6px;
+  background: var(--blanco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.check-box svg {
+  color: transparent;
+  transition: color 0.15s;
+}
+.checkbox-option label:hover {
+  border-color: var(--azul-lt);
+  background: rgba(0,51,102,0.04);
+}
+
+/* ── CHECKBOX (multi-select) activado ── */
+.checkbox-option input[type="checkbox"]:checked + label {
+  border-color: var(--guinda);
+  background: rgba(97,18,50,0.05);
+  color: var(--guinda);
+  font-weight: 500;
+}
+.checkbox-option input[type="checkbox"]:checked + label .check-box {
+  background: var(--guinda);
+  border-color: var(--guinda);
+}
+.checkbox-option input[type="checkbox"]:checked + label .check-box svg {
+  color: var(--blanco);
+}
+
+/* ── RADIO disfrazado de checkbox (single-select) ── */
+.checkbox-group--single .checkbox-option input[type="radio"]:checked + label {
+  border-color: var(--azul);
+  background: rgba(0,51,102,0.06);
+  color: var(--azul);
+  font-weight: 500;
+}
+.checkbox-group--single .checkbox-option input[type="radio"]:checked + label .check-box {
+  background: var(--azul);
+  border-color: var(--azul);
+}
+.checkbox-group--single .checkbox-option input[type="radio"]:checked + label .check-box svg {
+  color: var(--blanco);
+}
+.checkbox-group--single .checkbox-option label:hover {
+  border-color: var(--azul-lt);
+  background: rgba(0,51,102,0.04);
+}
+
+/* ── CAMPO "OTRO:" inline ── */
+.checkbox-option--otro {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.checkbox-option--otro label {
+  border-radius: 12px 0 0 12px;
+  border-right: none;
+  min-width: 110px;
+  flex-shrink: 0;
+}
+.checkbox-option--otro input[type="checkbox"]:checked + label,
+.checkbox-option--otro input[type="radio"]:checked + label {
+  border-color: var(--guinda);
+}
+.otro-input {
+  flex: 1;
+  min-width: 160px;
+  height: 48px;
+  padding: 0 14px;
+  border: 1.5px solid var(--gris-l);
+  border-left: none;
+  border-radius: 0 12px 12px 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  color: var(--texto);
+  background: var(--gris-f);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.otro-input:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.otro-input:not(:disabled):focus {
+  border-color: var(--guinda);
+  background: var(--blanco);
+  box-shadow: 0 0 0 4px rgba(97,18,50,0.07);
+}
+/* Cuando el checkbox está activado, el borde del input también cambia */
+.checkbox-option--otro input[type="checkbox"]:checked ~ .otro-input,
+.checkbox-option--otro input[type="radio"]:checked ~ .otro-input {
+  border-color: var(--guinda);
+  background: rgba(97,18,50,0.03);
+}
+
+/* ── TAG de opción (ej. "Mesas de trabajo") ── */
+.option-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--azul);
+  background: rgba(0,51,102,0.08);
+  border-radius: 4px;
+  padding: 2px 7px;
+  margin-left: 6px;
+  vertical-align: middle;
+  transition: color 0.2s, background 0.2s;
+}
+.checkbox-option input[type="checkbox"]:checked + label .option-tag {
+  color: var(--guinda);
+  background: rgba(97,18,50,0.12);
+}
+
+/* ── input[type="url"] ── */
+input[type="url"] {
+  width: 100%;
+  height: 50px;
+  padding: 0 42px 0 16px;
+  border: 1.5px solid var(--gris-l);
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--texto);
+  background: var(--gris-f);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+input[type="url"]::placeholder { color: var(--gris-t); font-weight: 300; }
+input[type="url"]:focus {
+  border-color: var(--azul);
+  background: var(--blanco);
+  box-shadow: 0 0 0 4px rgba(0,51,102,0.08);
+}
+input[type="url"]:hover:not(:focus) { border-color: var(--gris-t); }
