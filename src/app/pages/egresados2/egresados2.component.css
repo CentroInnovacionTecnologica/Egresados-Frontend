@@ -845,74 +845,6 @@ input[type="url"]:focus {
 }
 input[type="url"]:hover:not(:focus) { border-color: var(--gris-t); }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ── RADIO disfrazado de checkbox en grupo normal (guinda) ── */
-
-.checkbox-group .checkbox-option input[type="radio"]:checked + label {
-  border-color: var(--guinda);
-  background: rgba(97, 18, 50, 0.05);
-  color: var(--guinda);
-  font-weight: 500;
-}
-.checkbox-group .checkbox-option input[type="radio"]:checked + label .check-box {
-  background: var(--guinda);
-  border-color: var(--guinda);
-}
-.checkbox-group .checkbox-option input[type="radio"]:checked + label .check-box svg {
-  color: var(--blanco);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ESTILOS PARA EL MENSAJE DE ÉXITO */
 
 .success-toast {
@@ -969,4 +901,20 @@ input[type="url"]:hover:not(:focus) { border-color: var(--gris-t); }
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(50px); }
   to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── RADIO disfrazado de checkbox en grupo normal (guinda) ── */
+
+.checkbox-group .checkbox-option input[type="radio"]:checked + label {
+  border-color: var(--guinda);
+  background: rgba(97, 18, 50, 0.05);
+  color: var(--guinda);
+  font-weight: 500;
+}
+.checkbox-group .checkbox-option input[type="radio"]:checked + label .check-box {
+  background: var(--guinda);
+  border-color: var(--guinda);
+}
+.checkbox-group .checkbox-option input[type="radio"]:checked + label .check-box svg {
+  color: var(--blanco);
 }
