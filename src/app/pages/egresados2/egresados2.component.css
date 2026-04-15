@@ -534,10 +534,6 @@ input:hover:not(:focus) {
   gap: 10px;
 }
 
-.checkbox-option input[type="checkbox"] {
-  display: none;
-}
-
 .checkbox-option label {
   display: flex;
   align-items: center;
@@ -571,14 +567,16 @@ input:hover:not(:focus) {
   background: rgba(0, 51, 102, 0.04);
 }
 
-.checkbox-option input[type="checkbox"]:checked+label {
+.checkbox-option input[type="checkbox"]:checked + label,
+.checkbox-option input[type="radio"]:checked + label {
   border-color: var(--guinda);
   background: rgba(97, 18, 50, 0.05);
   color: var(--guinda);
   font-weight: 500;
 }
 
-.checkbox-option input[type="checkbox"]:checked+label svg {
+.checkbox-option input[type="checkbox"]:checked + label svg,
+.checkbox-option input[type="radio"]:checked + label svg {
   background: var(--guinda);
   border-color: var(--guinda);
   color: var(--blanco);
@@ -729,11 +727,13 @@ input:hover:not(:focus) {
   color: var(--guinda);
   font-weight: 500;
 }
-.checkbox-option input[type="checkbox"]:checked + label .check-box {
+.checkbox-option input[type="checkbox"]:checked + label .check-box,
+.checkbox-option input[type="radio"]:checked + label .check-box {
   background: var(--guinda);
   border-color: var(--guinda);
 }
-.checkbox-option input[type="checkbox"]:checked + label .check-box svg {
+.checkbox-option input[type="checkbox"]:checked + label .check-box svg,
+.checkbox-option input[type="radio"]:checked + label .check-box svg {
   color: var(--blanco);
 }
 
@@ -901,20 +901,4 @@ input[type="url"]:hover:not(:focus) { border-color: var(--gris-t); }
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(50px); }
   to   { opacity: 1; transform: translateX(0); }
-}
-
-/* ── RADIO disfrazado de checkbox en grupo normal (guinda) ── */
-
-.checkbox-group .checkbox-option input[type="radio"]:checked + label {
-  border-color: var(--guinda);
-  background: rgba(97, 18, 50, 0.05);
-  color: var(--guinda);
-  font-weight: 500;
-}
-.checkbox-group .checkbox-option input[type="radio"]:checked + label .check-box {
-  background: var(--guinda);
-  border-color: var(--guinda);
-}
-.checkbox-group .checkbox-option input[type="radio"]:checked + label .check-box svg {
-  color: var(--blanco);
 }
