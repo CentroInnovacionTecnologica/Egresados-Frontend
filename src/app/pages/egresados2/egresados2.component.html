@@ -1,4 +1,3 @@
-
 <header class="hero" role="banner">
     <div class="hero-badge">Segunda Etapa</div>
     <h1>Seguimiento de Egresados</h1>
@@ -66,7 +65,7 @@
                     </div>
                 </div>
                 <div class="field-wrap">
-                    <input type="text" id="ncontrol" name="ncontrol" placeholder="Ej. 18040123 o Desconocido"
+                    <input type="text" id="ncontrol" name="ncontrol" placeholder="Ej. 21040361 o Desconocido"
                         required />
                     <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -76,6 +75,11 @@
                 </div>
             </div>
 
+        </div>
+
+        <!-- Footer del formulario -->
+        <div class="form-footer">
+            <p class="progress-info">Sección <span>1 de 3</span> &nbsp;·&nbsp; 9 preguntas en total</p>
         </div>
     </div>
 
@@ -136,7 +140,7 @@
                             una opción</span>
                     </div>
                 </div>
-                <div class="checkbox-group checkbox-group--single">
+                <div class="checkbox-group">
                     <div class="checkbox-option">
                         <input type="radio" id="coin1" name="coincidencia" value="Totalmente" />
                         <label for="coin1">
@@ -217,6 +221,11 @@
                 </div>
             </div>
 
+        </div>
+
+        <!-- Footer del formulario -->
+        <div class="form-footer">
+            <p class="progress-info">Sección <span>2 de 3</span> &nbsp;·&nbsp; 9 preguntas en total</p>
         </div>
     </div>
 
@@ -471,9 +480,25 @@
 
         </div>
 
+        <!-- Mensaje de éxito elaborado -->
+        <div class="success-toast" *ngIf="mostrarExito">
+            <div class="toast-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <div class="toast-text">
+                <span class="toast-title">¡Formulario completado!</span>
+                <span class="toast-subtitle">Gracias por tu tiempo, tus respuestas han sido guardadas. ¡Seguimos en
+                    contacto!</span>
+            </div>
+        </div>
+
+        <!-- Footer global del formulario -->
         <div class="form-footer">
             <p class="progress-info">Sección <span>3 de 3</span> &nbsp;·&nbsp; 9 preguntas en total</p>
-            <button type="submit" class="btn-submit">
+            <button type="submit" class="btn-submit" (click)="onSubmit()">
                 Enviar respuestas
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                     stroke-width="2">
