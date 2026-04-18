@@ -6,517 +6,346 @@
 
 <main class="form-wrapper" role="main">
 
-    <!-- SECCIÓN 1 · Validación de Identidad -->
-    <div class="section-card">
-        <div class="section-header">
-            <div class="section-number">1</div>
-            <div>
-                <div class="section-title">Validación de Identidad</div>
-                <div class="section-subtitle">Confirma tus datos para enlazar con tu registro de la Etapa 1</div>
-            </div>
-        </div>
-
-        <div class="questions-list">
-
-            <div class="question-item">
-                <div class="question-label">
-                    <span class="q-num">1</span>
-                    <div class="q-text">
-                        Correo Electrónico Personal <span class="req">*</span>
-                        <span class="q-note">Debe ser el mismo registrado en la Etapa 1</span>
-                    </div>
-                </div>
-                <div class="field-wrap">
-                    <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" autocomplete="email"
-                        required />
-                    <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-                    </svg>
-                </div>
-            </div>
-
-            <div class="question-item">
-                <div class="question-label">
-                    <span class="q-num">2</span>
-                    <div class="q-text">
-                        Nombre Completo <span class="req">*</span>
-                        <span class="q-note">Empezando por apellidos</span>
-                    </div>
-                </div>
-                <div class="field-wrap">
-                    <input type="text" id="nombre" name="nombre" placeholder="Ej. López Hernández María"
-                        autocomplete="name" required />
-                    <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                    </svg>
-                </div>
-            </div>
-
-            <div class="question-item">
-                <div class="question-label">
-                    <span class="q-num">3</span>
-                    <div class="q-text">
-                        Número de Control <span class="req">*</span>
-                        <span class="q-note">Si no lo recuerdas, escribe "Desconocido"</span>
-                    </div>
-                </div>
-                <div class="field-wrap">
-                    <input type="text" id="ncontrol" name="ncontrol" placeholder="Ej. 21040361 o Desconocido"
-                        required />
-                    <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
-                    </svg>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Footer del formulario -->
-        <div class="form-footer">
-            <p class="progress-info">Sección <span>1 de 3</span> &nbsp;·&nbsp; 9 preguntas en total</p>
-        </div>
+    <!-- Estado de carga -->
+    <div class="loading-state" *ngIf="cargando">
+        <p>Cargando formulario…</p>
     </div>
 
-    <!-- SECCIÓN 2 · Detalle Profesional y Académico-->
-    <div class="section-divider">
-        <span class="divider-line"></span>
-        <span class="divider-label">Continúa con la siguiente sección</span>
-        <span class="divider-line"></span>
-    </div>
+    <form [formGroup]="form" novalidate *ngIf="!cargando">
 
-    <div class="section-card">
-        <div class="section-header">
-            <div class="section-number">2</div>
-            <div>
-                <div class="section-title">Detalle Profesional y Académico</div>
-                <div class="section-subtitle">Información sobre tu trayectoria y desarrollo actual</div>
+        <!-- ══════════════════════════════════════════════════════
+         SECCIÓN 1 · Validación de Identidad
+        ══════════════════════════════════════════════════════ -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <div>
+                    <div class="section-title">Validación de Identidad</div>
+                    <div class="section-subtitle">Confirma tus datos para enlazar con tu registro de la Etapa 1</div>
+                </div>
+            </div>
+
+            <div class="questions-list">
+
+                <!-- P1 · Correo -->
+                <div class="question-item">
+                    <div class="question-label">
+                        <span class="q-num">1</span>
+                        <div class="q-text">Correo Electrónico Personal <span class="req">*</span>
+                            <span class="q-note">Debe ser el mismo registrado en la Etapa 1</span>
+                        </div>
+                    </div>
+                    <div class="field-wrap">
+                        <input type="email" id="correo" formControlName="correo" placeholder="ejemplo@correo.com"
+                            autocomplete="email" />
+                    </div>
+                    <span class="field-error" *ngIf="f['correo'].invalid && f['correo'].touched">
+                        Ingresa el correo con el que te registraste en la Etapa 1.
+                    </span>
+                </div>
+
+                <!-- P2 · Nombre -->
+                <div class="question-item">
+                    <div class="question-label">
+                        <span class="q-num">2</span>
+                        <div class="q-text">Nombre Completo <span class="req">*</span>
+                            <span class="q-note">Empezando por apellidos</span>
+                        </div>
+                    </div>
+                    <div class="field-wrap">
+                        <input type="text" id="nombre" formControlName="nombre" placeholder="Ej. López Hernández María"
+                            autocomplete="name" />
+                    </div>
+                    <span class="field-error" *ngIf="f['nombre'].invalid && f['nombre'].touched">
+                        El nombre es obligatorio.
+                    </span>
+                </div>
+
+                <!-- P3 · Número de control -->
+                <div class="question-item">
+                    <div class="question-label">
+                        <span class="q-num">3</span>
+                        <div class="q-text">Número de Control <span class="req">*</span>
+                            <span class="q-note">Si no lo recuerdas, escribe "Desconocido"</span>
+                        </div>
+                    </div>
+                    <div class="field-wrap">
+                        <input type="text" id="ncontrol" formControlName="ncontrol"
+                            placeholder="Ej. 21040361 o Desconocido" />
+                    </div>
+                    <span class="field-error" *ngIf="f['ncontrol'].invalid && f['ncontrol'].touched">
+                        Ingresa tu número de control o escribe "Desconocido".
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="form-footer">
+                <p class="progress-info">Sección <span>1 de 3</span> &nbsp;·&nbsp; 9 preguntas en total</p>
             </div>
         </div>
 
-        <div class="questions-list">
+        <!-- DIVIDER -->
+        <div class="section-divider">
+            <span class="divider-line"></span>
+            <span class="divider-label">Continúa con la siguiente sección</span>
+            <span class="divider-line"></span>
+        </div>
 
-            <div class="question-item">
-                <div class="question-label">
-                    <span class="q-num">1</span>
-                    <label class="q-text" for="linkedin">Enlace a tu perfil de LinkedIn</label>
+        <!-- ══════════════════════════════════════════════════════
+         SECCIÓN 2 · Detalle Profesional y Académico
+        ══════════════════════════════════════════════════════ -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <div>
+                    <div class="section-title">Detalle Profesional y Académico</div>
+                    <div class="section-subtitle">Información sobre tu trayectoria y desarrollo actual</div>
                 </div>
-                <div class="field-wrap">
-                    <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/tu-perfil" />
-                    <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+            </div>
+
+            <div class="questions-list">
+
+                <!-- P1 · LinkedIn -->
+                <div class="question-item">
+                    <div class="question-label">
+                        <span class="q-num">1</span>
+                        <label class="q-text" for="linkedin">Enlace a tu perfil de LinkedIn</label>
+                    </div>
+                    <div class="field-wrap">
+                        <input type="url" id="linkedin" formControlName="linkedin"
+                            placeholder="https://linkedin.com/in/tu-perfil" />
+                    </div>
+                </div>
+
+                <!-- P2 · Puesto -->
+                <div class="question-item">
+                    <div class="question-label">
+                        <span class="q-num">2</span>
+                        <label class="q-text" for="puesto">Puesto específico que desempeñas</label>
+                    </div>
+                    <div class="field-wrap">
+                        <input type="text" id="puesto" formControlName="puesto"
+                            placeholder="Ej. Ingeniero de Software Senior" />
+                    </div>
+                </div>
+
+                <!-- P3 · Coincidencia laboral — dinámico desde BD -->
+                <div class="question-item">
+                    <div class="question-label">
+                        <span class="q-num">3</span>
+                        <div class="q-text">Coincidencia Laboral <span class="req">*</span>
+                            <span class="q-note">¿Qué tanto coincide tu trabajo con tu carrera?</span>
+                        </div>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option" *ngFor="let c of coincidenciasLaborales">
+                            <input type="radio" [id]="'coin-' + c.id_coincidencia" formControlName="coincidencia"
+                                [value]="c.nivel" />
+                            <label [for]="'coin-' + c.id_coincidencia">
+                                <span class="check-box"></span>
+                                {{ c.nivel }}
+                            </label>
+                        </div>
+                    </div>
+                    <span class="field-error" *ngIf="f['coincidencia'].invalid && f['coincidencia'].touched">
+                        Selecciona una opción de coincidencia laboral.
+                    </span>
+                </div>
+
+                <!-- P4 · Certificaciones específicas -->
+                <div class="question-item">
+                    <div class="question-label">
+                        <span class="q-num">4</span>
+                        <label class="q-text" for="certificaciones">Certificaciones o posgrados específicos
+                            (nombres)</label>
+                    </div>
+                    <div class="field-wrap">
+                        <input type="text" id="certificaciones" formControlName="certificaciones"
+                            placeholder="Ej. AWS Certified Developer, Maestría en Administración" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-footer">
+                <p class="progress-info">Sección <span>2 de 3</span> &nbsp;·&nbsp; 9 preguntas en total</p>
+            </div>
+        </div>
+
+        <!-- DIVIDER -->
+        <div class="section-divider">
+            <span class="divider-line"></span>
+            <span class="divider-label">Última sección</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════
+         SECCIÓN 3 · Opinión Experta
+        ══════════════════════════════════════════════════════ -->
+        <div class="section-card">
+            <div class="section-header section-header--last">
+                <div class="section-number section-number--last">3</div>
+                <div>
+                    <div class="section-title">Tu Opinión Experta: Mejora Continua</div>
+                    <div class="section-subtitle">Tu experiencia es clave para mejorar la formación de futuros egresados
+                    </div>
+                </div>
+            </div>
+
+            <div class="questions-list">
+
+                <!-- P1 · Habilidades -->
+                <div class="question-item">
+                    <div class="question-label">
+                        <span class="q-num">1</span>
+                        <div class="q-text">Habilidades a Reforzar <span class="req">*</span>
+                            <span class="q-note">Puedes seleccionar una o más opciones</span>
+                        </div>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="hab1" formControlName="hab_ingles" />
+                            <label for="hab1"><span class="check-box"></span>Dominio del idioma inglés</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="hab2" formControlName="hab_blandas" />
+                            <label for="hab2"><span class="check-box"></span>Habilidades blandas (Liderazgo,
+                                Comunicación efectiva, Trabajo en equipo, Inteligencia emocional)</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="hab3" formControlName="hab_software" />
+                            <label for="hab3"><span class="check-box"></span>Uso de Software especializado y
+                                herramientas digitales actuales</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="hab4" formControlName="hab_proyectos" />
+                            <label for="hab4"><span class="check-box"></span>Gestión de proyectos y metodologías
+                                ágiles</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="hab5" formControlName="hab_emprendimiento" />
+                            <label for="hab5"><span class="check-box"></span>Emprendimiento, Innovación y plan de
+                                negocios</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="hab6" formControlName="hab_vinculacion" />
+                            <label for="hab6"><span class="check-box"></span>Vinculación práctica (Visitas industriales
+                                y casos reales)</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="hab7" formControlName="hab_normatividad" />
+                            <label for="hab7"><span class="check-box"></span>Normatividad y legislación aplicable a la
+                                carrera</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="hab8" formControlName="hab_datos" />
+                            <label for="hab8"><span class="check-box"></span>Ciencia de datos y análisis de
+                                información</label>
+                        </div>
+                        <div class="checkbox-option checkbox-option--otro">
+                            <input type="checkbox" id="hab9" formControlName="hab_otro_check" />
+                            <label for="hab9"><span class="check-box"></span>Otro:</label>
+                            <input type="text" class="otro-input" formControlName="hab_otro_texto"
+                                placeholder="Escribe aquí tu respuesta"
+                                [attr.disabled]="!f['hab_otro_check'].value ? '' : null" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P2 · Colaboraciones -->
+                <div class="question-item">
+                    <div class="question-label">
+                        <span class="q-num">2</span>
+                        <div class="q-text">Interés en Colaborar
+                            <span class="q-note">Puedes seleccionar una o más opciones</span>
+                        </div>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="col1" formControlName="col_planes" />
+                            <label for="col1"><span class="check-box"></span>Participar en la revisión y actualización
+                                de los planes de estudio <span class="option-tag">Mesas de trabajo</span></label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="col2" formControlName="col_platicas" />
+                            <label for="col2"><span class="check-box"></span>Impartir pláticas, conferencias o talleres
+                                a estudiantes</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="col3" formControlName="col_asesor" />
+                            <label for="col3"><span class="check-box"></span>Apoyar como asesor externo en residencias
+                                profesionales o proyectos</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="col4" formControlName="col_patronato" />
+                            <label for="col4"><span class="check-box"></span>Colaborar con el Patronato o Fundación ITD
+                                en iniciativas de apoyo (Becas, equipamiento o infraestructura)</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="col5" formControlName="col_empresa" />
+                            <label for="col5"><span class="check-box"></span>Vincular a mi empresa con el ITD (Bolsa de
+                                trabajo, visitas, convenios)</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="col6" formControlName="col_encuestas" />
+                            <label for="col6"><span class="check-box"></span>Responder encuestas de opinión específicas
+                                sobre mi área</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="col7" formControlName="col_nopuedo" />
+                            <label for="col7"><span class="check-box"></span>Por el momento no me es posible
+                                participar</label>
+                        </div>
+                        <div class="checkbox-option checkbox-option--otro">
+                            <input type="checkbox" id="col8" formControlName="col_otro_check" />
+                            <label for="col8"><span class="check-box"></span>Otro:</label>
+                            <input type="text" class="otro-input" formControlName="col_otro_texto"
+                                placeholder="Escribe aquí tu respuesta"
+                                [attr.disabled]="!f['col_otro_check'].value ? '' : null" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Mensaje de error general -->
+            <div class="error-toast" *ngIf="errorMensaje">
+                <span>{{ errorMensaje }}</span>
+            </div>
+
+            <!-- Mensaje de éxito -->
+            <div class="success-toast" *ngIf="mostrarExito">
+                <div class="toast-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                 </div>
-            </div>
-
-            <div class="question-item">
-                <div class="question-label">
-                    <span class="q-num">2</span>
-                    <label class="q-text" for="puesto">Puesto específico que desempeñas</label>
-                </div>
-                <div class="field-wrap">
-                    <input type="text" id="puesto" name="puesto" placeholder="Ej. Ingeniero de Software Senior" />
-                    <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                    </svg>
+                <div class="toast-text">
+                    <span class="toast-title">¡Formulario completado!</span>
+                    <span class="toast-subtitle">Gracias por tu tiempo, tus respuestas han sido guardadas. ¡Seguimos en
+                        contacto!</span>
                 </div>
             </div>
 
-            <div class="question-item">
-                <div class="question-label">
-                    <span class="q-num">3</span>
-                    <div class="q-text">
-                        Coincidencia Laboral <span class="req">*</span>
-                        <span class="q-note">¿Qué tanto coincide tu trabajo con tu carrera? Selecciona únicamente
-                            una opción</span>
-                    </div>
-                </div>
-                <div class="checkbox-group">
-                    <div class="checkbox-option">
-                        <input type="radio" id="coin1" name="coincidencia" value="Totalmente" />
-                        <label for="coin1">
-                            <span class="check-box"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg></span>
-                            Totalmente
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="radio" id="coin2" name="coincidencia" value="En gran medida" />
-                        <label for="coin2">
-                            <span class="check-box"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg></span>
-                            En gran medida
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="radio" id="coin3" name="coincidencia" value="Parcialmente" />
-                        <label for="coin3">
-                            <span class="check-box"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg></span>
-                            Parcialmente
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="radio" id="coin4" name="coincidencia" value="Poco" />
-                        <label for="coin4">
-                            <span class="check-box"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg></span>
-                            Poco
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="radio" id="coin5" name="coincidencia" value="Nada" />
-                        <label for="coin5">
-                            <span class="check-box"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg></span>
-                            Nada
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="radio" id="coin6" name="coincidencia" value="No aplica" />
-                        <label for="coin6">
-                            <span class="check-box"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg></span>
-                            No aplica / Actualmente no estoy laborando
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="question-item">
-                <div class="question-label">
-                    <span class="q-num">4</span>
-                    <label class="q-text" for="certificaciones">Certificaciones o posgrados específicos
-                        (nombres)</label>
-                </div>
-                <div class="field-wrap">
-                    <input type="text" id="certificaciones" name="certificaciones"
-                        placeholder="Ej. AWS Certified Developer, Maestría en Administración" />
-                    <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 3.741-1.342m-7.482 0c-.391.05-.779.108-1.164.173m9.009-.19c.389.065.773.124 1.154.173" />
-                    </svg>
-                </div>
+            <div class="form-footer">
+                <p class="progress-info">Sección <span>3 de 3</span> &nbsp;·&nbsp; 9 preguntas en total</p>
+                <button type="button" class="btn-submit" (click)="onSubmit()" [disabled]="enviando">
+                    <span *ngIf="!enviando">
+                        Enviar respuestas
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                        </svg>
+                    </span>
+                    <span *ngIf="enviando">Guardando…</span>
+                </button>
             </div>
 
         </div>
 
-        <!-- Footer del formulario -->
-        <div class="form-footer">
-            <p class="progress-info">Sección <span>2 de 3</span> &nbsp;·&nbsp; 9 preguntas en total</p>
-        </div>
-    </div>
-
-    <!-- SECCIÓN 3 · Opinión Experta -->
-    <div class="section-divider">
-        <span class="divider-line"></span>
-        <span class="divider-label">Última sección</span>
-        <span class="divider-line"></span>
-    </div>
-
-    <div class="section-card">
-        <div class="section-header section-header--last">
-            <div class="section-number section-number--last">3</div>
-            <div>
-                <div class="section-title">Tu Opinión Experta: Mejora Continua</div>
-                <div class="section-subtitle">Tu experiencia es clave para mejorar la formación de futuros egresados
-                </div>
-            </div>
-        </div>
-
-        <div class="questions-list">
-
-            <!-- P1: Habilidades -->
-            <div class="question-item">
-                <div class="question-label">
-                    <span class="q-num">1</span>
-                    <div class="q-text">
-                        Habilidades a Reforzar <span class="req">*</span>
-                        <span class="q-note">¿Qué habilidades consideras que el ITD debería reforzar en sus planes
-                            de estudio? Puedes seleccionar una o más opciones</span>
-                    </div>
-                </div>
-                <div class="checkbox-group">
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="hab1" name="habilidades" value="Dominio del idioma inglés" />
-                        <label for="hab1">
-                            <span class="check-box">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg>
-                            </span>
-                            Dominio del idioma inglés
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="hab2" name="habilidades" value="Habilidades blandas" />
-                        <label for="hab2">
-                            <span class="check-box">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg>
-                            </span>
-                            Habilidades blandas (Liderazgo, Comunicación efectiva, Trabajo en equipo, Inteligencia
-                            emocional)
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="hab3" name="habilidades" value="Uso de software especializado" />
-                        <label for="hab3">
-                            <span class="check-box">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg>
-                            </span>
-                            Uso de Software especializado y herramientas digitales actuales
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="hab4" name="habilidades"
-                            value="Gestión de proyectos y metodologías ágiles" />
-                        <label for="hab4">
-                            <span class="check-box">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg>
-                            </span>
-                            Gestión de proyectos y metodologías ágiles
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="hab5" name="habilidades"
-                            value="Emprendimiento, innovación y plan de negocios" />
-                        <label for="hab5">
-                            <span class="check-box">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg>
-                            </span>
-                            Emprendimiento, Innovación y plan de negocios
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="hab6" name="habilidades" value="Vinculación práctica" />
-                        <label for="hab6">
-                            <span class="check-box">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg>
-                            </span>
-                            Vinculación práctica (Visitas industriales y casos reales)
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="hab7" name="habilidades"
-                            value="Normatividad y legislación aplicable" />
-                        <label for="hab7">
-                            <span class="check-box">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg>
-                            </span>
-                            Normatividad y legislación aplicable a la carrera
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="hab8" name="habilidades"
-                            value="Ciencia de datos y análisis de información" />
-                        <label for="hab8">
-                            <span class="check-box">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg>
-                            </span>
-                            Ciencia de datos y análisis de información
-                        </label>
-                    </div>
-                    <div class="checkbox-option checkbox-option--otro">
-                        <input type="checkbox" id="hab9" name="habilidades" value="otro-hab" class="otro-trigger" />
-                        <label for="hab9">
-                            <span class="check-box">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg>
-                            </span>
-                            Otro:
-                        </label>
-                        <input type="text" class="otro-input" id="hab9-texto" name="habilidades-otro"
-                            placeholder="Escribe aquí tu respuesta" />
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- P2: Interés en colaborar -->
-            <div class="question-item">
-                <div class="question-label">
-                    <span class="q-num">2</span>
-                    <div class="q-text">
-                        Interés en Colaborar
-                        <span class="q-note">Puedes seleccionar una o más opciones</span>
-                    </div>
-                </div>
-                <div class="checkbox-group">
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="col1" name="colaboracion" value="Revisión de planes de estudio" />
-                        <label for="col1">
-                            <span class="check-box"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg></span>
-                            Participar en la revisión y actualización de los planes de estudio <span
-                                class="option-tag">Mesas de trabajo</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="col2" name="colaboracion" value="Pláticas y conferencias" />
-                        <label for="col2">
-                            <span class="check-box"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg></span>
-                            Impartir pláticas, conferencias o talleres a estudiantes
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="col3" name="colaboracion" value="Asesor externo residencias" />
-                        <label for="col3">
-                            <span class="check-box"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg></span>
-                            Apoyar como asesor externo en residencias profesionales o proyectos
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="col4" name="colaboracion"
-                            value="Colaborar con el Patronato o Fundación ITD" />
-                        <label for="col4">
-                            <span class="check-box"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg></span>
-                            Colaborar con el Patronato o Fundación ITD en iniciativas de apoyo (Becas, equipamiento
-                            o
-                            infraestructura)
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="col5" name="colaboracion" value="Vincular empresa con el ITD" />
-                        <label for="col5">
-                            <span class="check-box"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg></span>
-                            Vincular a mi empresa con el ITD (Bolsa de trabajo, visitas, convenios)
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="col6" name="colaboracion" value="Responder encuestas de opinión" />
-                        <label for="col6">
-                            <span class="check-box"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg></span>
-                            Responder encuestas de opinión específicas sobre mi área
-                        </label>
-                    </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="col7" name="colaboracion"
-                            value="Por el momento no me es posible participar" />
-                        <label for="col7">
-                            <span class="check-box"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg></span>
-                            Por el momento no me es posible participar
-                        </label>
-                    </div>
-                    <div class="checkbox-option checkbox-option--otro">
-                        <input type="checkbox" id="col8" name="colaboracion" value="otro-col" class="otro-trigger" />
-                        <label for="col8">
-                            <span class="check-box"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                </svg></span>
-                            Otro:
-                        </label>
-                        <input type="text" class="otro-input" id="col8-texto" name="colaboracion-otro"
-                            placeholder="Escribe aquí tu respuesta" />
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Mensaje de éxito elaborado -->
-        <div class="success-toast" *ngIf="mostrarExito">
-            <div class="toast-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-            </div>
-            <div class="toast-text">
-                <span class="toast-title">¡Formulario completado!</span>
-                <span class="toast-subtitle">Gracias por tu tiempo, tus respuestas han sido guardadas. ¡Seguimos en
-                    contacto!</span>
-            </div>
-        </div>
-
-        <!-- Footer global del formulario -->
-        <div class="form-footer">
-            <p class="progress-info">Sección <span>3 de 3</span> &nbsp;·&nbsp; 9 preguntas en total</p>
-            <button type="submit" class="btn-submit" (click)="onSubmit()">
-                Enviar respuestas
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                </svg>
-            </button>
-        </div>
-
-    </div>
+    </form>
 
 </main>
-
-<script>
-    document.querySelectorAll('.otro-trigger').forEach(function (cb) {
-        cb.addEventListener('change', function () {
-            var input = this.closest('.checkbox-option--otro').querySelector('.otro-input');
-            input.disabled = !this.checked;
-            if (this.checked) { input.focus(); }
-        });
-    });
-</script>
