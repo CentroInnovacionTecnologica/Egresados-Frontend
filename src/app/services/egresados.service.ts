@@ -8,7 +8,7 @@ import { CreateEgresadoEtapa1, CreateEgresadoEtapa2, RespuestaEtapa1, } from '..
 })
 export class EgresadosService {
 
-  private readonly API = 'http://localhost:3000/';
+  private readonly API = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
