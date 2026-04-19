@@ -1,14 +1,15 @@
-import { Component, ViewEncapsulation, OnInit, Inject, PLATFORM_ID, } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, OnDestroy, Inject, PLATFORM_ID, } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, } from '@angular/forms';
-import { forkJoin } from 'rxjs';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { forkJoin, Subject, of, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
 import { EgresadosService }  from '../../services/egresados.service';
 import { CatalogosService }  from '../../services/catalogos.service';
 import { CreateEgresadoEtapa1 } from '../../models/egresado.interface';
-import { Carrera, Genero, NivelIngles, SituacionLaboral, AntiguedadEmpleo,
-  CertificacionVigente,
-} from '../../models/catalogos.interface';
+import { Carrera, Genero, NivelIngles, SituacionLaboral,
+  AntiguedadEmpleo, CertificacionVigente, } from '../../models/catalogos.interface';
 
 @Component({
   selector: 'app-egresados1',
@@ -18,7 +19,7 @@ import { Carrera, Genero, NivelIngles, SituacionLaboral, AntiguedadEmpleo,
   styleUrls: ['./egresados1.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class Egresados1Component implements OnInit {
+export class Egresados1Component implements OnInit, OnDestroy {
 
   form: FormGroup;
   mostrarExito  = false;
@@ -34,11 +35,37 @@ export class Egresados1Component implements OnInit {
   antiguedades:            AntiguedadEmpleo[]     = [];
   certificacionesVigentes: CertificacionVigente[] = [];
 
+  // Autocomplete ciudad residencia 
+  sugerenciasCiudad:   string[]  = [];
+  buscandoCiudad:      boolean   = false;
+  mostrarSugerencias:  boolean   = false;
+  ciudadSinResultados: boolean   = false;
+
+  // Autocomplete ciudad trabajo 
+  sugerenciasCiudadTrabajo:   string[]  = [];
+  buscandoCiudadTrabajo:      boolean   = false;
+  mostrarSugerenciasTrabajo:  boolean   = false;
+  ciudadTrabajoSinResultados: boolean   = false;
+
+  private ciudadInput$        = new Subject<string>();
+  private ciudadTrabajoInput$ = new Subject<string>();
+  private ciudadSub!:          Subscription;
+  private ciudadTrabajoSub!:   Subscription;
+  private situacionSub!:       Subscription;
+
+  // Situaciones que NO están trabajando
+  private readonly SITUACIONES_INACTIVAS = [
+    'Desempleado',
+    'Estudiando Posgrado',
+    'Dedicado al hogar u otras actividades',
+  ];
+
   constructor(
     private fb:        FormBuilder,
     private router:    Router,
     private svc:       EgresadosService,
     private catalogos: CatalogosService,
+    private http:      HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {
     this.form = this.fb.group({
@@ -65,12 +92,20 @@ export class Egresados1Component implements OnInit {
 
   get f() { return this.form.controls; }
 
+  // Getter reactivo: true si el egresado está trabajando
+  get estaActivo(): boolean {
+    const valor = (this.form.get('situacion')?.value ?? '').toLowerCase();
+    return !this.SITUACIONES_INACTIVAS.some(s => s.toLowerCase() === valor);
+  }
+
+  // Ciclo de vida
+
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Carga todos los catálogos en paralelo con forkJoin
+    // Carga todos los catálogos en paralelo
     forkJoin({
       carreras:                this.catalogos.getCarreras(),
       generos:                 this.catalogos.getGeneros(),
@@ -94,8 +129,167 @@ export class Egresados1Component implements OnInit {
         console.error('Error cargando catálogos:', err);
       },
     });
+
+    // Pipeline autocomplete ciudad residencia
+    this.ciudadSub = this.ciudadInput$.pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(query => {
+        if (!query || query.length < 2) {
+          this.sugerenciasCiudad   = [];
+          this.ciudadSinResultados = false;
+          this.buscandoCiudad      = false;
+          return of([]);
+        }
+        this.buscandoCiudad      = true;
+        this.ciudadSinResultados = false;
+
+        const url =
+          `https://nominatim.openstreetmap.org/search` +
+          `?q=${encodeURIComponent(query)}` +
+          `&format=json&addressdetails=1&limit=6&featuretype=city`;
+
+        return this.http.get<any[]>(url, {
+          headers: { 'Accept-Language': 'es' },
+        }).pipe(catchError(() => of([])));
+      }),
+    ).subscribe((resultados: any[]) => {
+      this.buscandoCiudad = false;
+
+      if (!resultados || resultados.length === 0) {
+        this.sugerenciasCiudad   = [];
+        this.ciudadSinResultados = true;
+        return;
+      }
+
+      const etiquetas = resultados.map((r: any) => {
+        const a      = r.address || {};
+        const ciudad = a.city || a.town || a.village || a.municipality
+                    || a.county || r.display_name.split(',')[0].trim();
+        const estado = a.state   || a.region  || '';
+        const pais   = a.country || '';
+        return [ciudad, estado, pais].filter(Boolean).join(', ');
+      });
+
+      this.sugerenciasCiudad   = [...new Set(etiquetas)];
+      this.ciudadSinResultados = this.sugerenciasCiudad.length === 0;
+      this.mostrarSugerencias  = true;
+    });
+
+    // Pipeline autocomplete ciudad trabajo
+    this.ciudadTrabajoSub = this.ciudadTrabajoInput$.pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(query => {
+        if (!query || query.length < 2) {
+          this.sugerenciasCiudadTrabajo   = [];
+          this.ciudadTrabajoSinResultados = false;
+          this.buscandoCiudadTrabajo      = false;
+          return of([]);
+        }
+        this.buscandoCiudadTrabajo      = true;
+        this.ciudadTrabajoSinResultados = false;
+
+        const url =
+          `https://nominatim.openstreetmap.org/search` +
+          `?q=${encodeURIComponent(query)}` +
+          `&format=json&addressdetails=1&limit=6&featuretype=city`;
+
+        return this.http.get<any[]>(url, {
+          headers: { 'Accept-Language': 'es' },
+        }).pipe(catchError(() => of([])));
+      }),
+    ).subscribe((resultados: any[]) => {
+      this.buscandoCiudadTrabajo = false;
+
+      if (!resultados || resultados.length === 0) {
+        this.sugerenciasCiudadTrabajo   = [];
+        this.ciudadTrabajoSinResultados = true;
+        return;
+      }
+
+      const etiquetas = resultados.map((r: any) => {
+        const a      = r.address || {};
+        const ciudad = a.city || a.town || a.village || a.municipality
+                    || a.county || r.display_name.split(',')[0].trim();
+        const estado = a.state   || a.region  || '';
+        const pais   = a.country || '';
+        return [ciudad, estado, pais].filter(Boolean).join(', ');
+      });
+
+      this.sugerenciasCiudadTrabajo   = [...new Set(etiquetas)];
+      this.ciudadTrabajoSinResultados = this.sugerenciasCiudadTrabajo.length === 0;
+      this.mostrarSugerenciasTrabajo  = true;
+    });
+
+    // Escucha cambios en situación laboral
+    this.situacionSub = this.form.get('situacion')!.valueChanges
+      .subscribe((valor: string) => {
+        const inactivo = this.SITUACIONES_INACTIVAS
+          .some(s => s.toLowerCase() === valor?.toLowerCase());
+
+        if (inactivo) {
+          this.form.get('empresa')!.setValue('');
+          this.form.get('antiguedad')!.setValue('');
+          this.form.get('ciudadtrabajo')!.setValue('');
+          this.form.get('antiguedad')!.clearValidators();
+
+          // Cierra ambos autocompletes
+          this.sugerenciasCiudad        = [];
+          this.mostrarSugerencias       = false;
+          this.sugerenciasCiudadTrabajo  = [];
+          this.mostrarSugerenciasTrabajo = false;
+        } else {
+          this.form.get('antiguedad')!.setValidators(Validators.required);
+        }
+
+        this.form.get('antiguedad')!.updateValueAndValidity();
+      });
   }
 
+  ngOnDestroy(): void {
+    this.ciudadSub?.unsubscribe();
+    this.ciudadTrabajoSub?.unsubscribe();
+    this.situacionSub?.unsubscribe();
+  }
+
+  // Métodos autocomplete ciudad residencia
+
+  onCiudadInput(event: Event): void {
+    const valor = (event.target as HTMLInputElement).value;
+    this.mostrarSugerencias = true;
+    this.ciudadInput$.next(valor);
+  }
+
+  onCiudadBlur(): void {
+    setTimeout(() => { this.mostrarSugerencias = false; }, 200);
+  }
+
+  seleccionarCiudad(ciudad: string): void {
+    this.form.get('ciudad')!.setValue(ciudad);
+    this.sugerenciasCiudad  = [];
+    this.mostrarSugerencias = false;
+  }
+
+  // Métodos autocomplete ciudad trabajo
+
+  onCiudadTrabajoInput(event: Event): void {
+    const valor = (event.target as HTMLInputElement).value;
+    this.mostrarSugerenciasTrabajo = true;
+    this.ciudadTrabajoInput$.next(valor);
+  }
+
+  onCiudadTrabajoBlur(): void {
+    setTimeout(() => { this.mostrarSugerenciasTrabajo = false; }, 200);
+  }
+
+  seleccionarCiudadTrabajo(ciudad: string): void {
+    this.form.get('ciudadtrabajo')!.setValue(ciudad);
+    this.sugerenciasCiudadTrabajo  = [];
+    this.mostrarSugerenciasTrabajo = false;
+  }
+
+  // Submit
   onSubmit(): void {
     this.form.markAllAsTouched();
     this.errorMensaje = '';
@@ -120,7 +314,7 @@ export class Egresados1Component implements OnInit {
       nivel_ingles:           v.ingles,
       situacion_laboral:      v.situacion,
       empresa:                v.empresa       || '',
-      antiguedad_empleo:      v.antiguedad,
+      antiguedad_empleo:      v.antiguedad    || '',
       ciudad_trabajo:         v.ciudadtrabajo || '',
       satisfaccion_formacion: Number(v.satisfaccion),
       autorizaciones: {

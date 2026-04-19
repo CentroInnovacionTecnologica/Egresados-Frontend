@@ -49,11 +49,10 @@
                     <div class="question-label">
                         <span class="q-num">2</span>
                         <div class="q-text">Nombre Completo <span class="req">*</span>
-                            <span class="q-note">Empezando por apellidos</span>
                         </div>
                     </div>
                     <div class="field-wrap">
-                        <input type="text" id="nombre" formControlName="nombre" placeholder="Ej. López Hernández María"
+                        <input type="text" id="nombre" formControlName="nombre" placeholder="Ej. María López Hernández"
                             autocomplete="name" />
                     </div>
                     <span class="field-error" *ngIf="f['nombre'].invalid && f['nombre'].touched">
