@@ -142,21 +142,21 @@ export class Egresados2Component implements OnInit {
 
     const habilidades: string[] = [];
     if (v.hab_ingles) habilidades.push('Dominio del idioma inglés');
-    if (v.hab_blandas) habilidades.push('Habilidades blandas');
-    if (v.hab_software) habilidades.push('Uso de software especializado');
-    if (v.hab_proyectos) habilidades.push('Gestión de proyectos y metodologías ágiles');
-    if (v.hab_emprendimiento) habilidades.push('Emprendimiento, innovación y plan de negocios');
-    if (v.hab_vinculacion) habilidades.push('Vinculación práctica');
-    if (v.hab_normatividad) habilidades.push('Normatividad y legislación aplicable');
-    if (v.hab_datos) habilidades.push('Ciencia de datos y análisis de información');
+    if (v.hab_blandas) habilidades.push('Habilidades blandas (Liderazgo, Comunicación efectiva, Trabajo en equipo, Inteligencia emocional)');
+    if (v.hab_software) habilidades.push('Uso de Software especializado y herramientas digitales actuales');
+    if (v.hab_proyectos) habilidades.push('Gestión de Proyectos y metodologías ágiles');
+    if (v.hab_emprendimiento) habilidades.push('Emprendimiento, Innovación y plan de negocios');
+    if (v.hab_vinculacion) habilidades.push('Vinculación práctica (Visitas industriales y casos reales)');
+    if (v.hab_normatividad) habilidades.push('Normatividad y Legislación aplicable a la carrera');
+    if (v.hab_datos) habilidades.push('Ciencia de Datos y Análisis de información');
 
     const colaboraciones: string[] = [];
-    if (v.col_planes) colaboraciones.push('Revisión de planes de estudio');
-    if (v.col_platicas) colaboraciones.push('Pláticas y conferencias');
-    if (v.col_asesor) colaboraciones.push('Asesor externo residencias');
-    if (v.col_patronato) colaboraciones.push('Colaborar con el Patronato o Fundación ITD');
-    if (v.col_empresa) colaboraciones.push('Vincular empresa con el ITD');
-    if (v.col_encuestas) colaboraciones.push('Responder encuestas de opinión');
+    if (v.col_planes) colaboraciones.push('Participar en la revisión y actualización de los planes de estudio (Mesas de trabajo)');
+    if (v.col_platicas) colaboraciones.push('Impartir pláticas, conferencias o talleres a estudiantes');
+    if (v.col_asesor) colaboraciones.push('Apoyar como asesor externo en Residencias Profesionales o proyectos');
+    if (v.col_patronato) colaboraciones.push('Colaborar con el Patronato o Fundación ITD en iniciativas de apoyo (Becas, equipamiento o infraestructura).');
+    if (v.col_empresa) colaboraciones.push('Vincular a mi empresa con el ITD (Bolsa de trabajo, visitas, convenios)');
+    if (v.col_encuestas) colaboraciones.push('Responder encuestas de opinión específicas sobre mi área');
     if (v.col_nopuedo) colaboraciones.push('Por el momento no me es posible participar');
 
     const payload: CreateEgresadoEtapa2 = {
