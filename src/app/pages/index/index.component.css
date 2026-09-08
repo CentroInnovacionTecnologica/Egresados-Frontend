@@ -110,7 +110,7 @@ body {
 
 /* El logo del TecNM llena mejor el círculo */
 .logo-slot--tecnm img {
-    transform: scale(1.35);
+    transform: scale(1.45);
 }
 
 /* El escudo del ITD necesita margen interno para no tocar el borde */
