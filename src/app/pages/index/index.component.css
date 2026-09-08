@@ -79,13 +79,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px 20px;
+    gap: 28px;
 }
 
 .logo-slot {
-    width: 68px;
-    height: 68px;
+    width: 96px;
+    height: 96px;
     border-radius: 50%;
     background: #ffffff;
     border: 1.5px solid rgba(255, 255, 255, 0.25);
@@ -94,70 +93,29 @@ body {
     justify-content: center;
     overflow: hidden;
     flex-shrink: 0;
-    transition: transform 0.25s ease, background 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .logo-slot:hover {
-    transform: scale(1.08);
-    background: rgba(255, 255, 255, 0.2);
-}
-
-/* Placeholder siglas cuando no hay imagen real */
-.logo-slot span {
-    font-family: 'Playfair Display', serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--gold);
-    text-align: center;
-    line-height: 1.15;
-    padding: 4px;
+    transform: scale(1.06);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
 }
 
 .logo-slot img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 8px;
-    /*filter: brightness(0) invert(1); */
+    object-position: center;
 }
 
+/* El logo del TecNM llena mejor el círculo */
 .logo-slot--tecnm img {
-    padding: 0;
-    object-fit: cover;
-    object-position: center;
-    transform: scale(0.7);
+    transform: scale(1.35);
 }
 
-.logo-slot:not(.logo-slot--tecnm) img {
-    padding: 10px;
-}
-
-.logo-slot--patronato img {
-    padding: 0;
-    object-fit: contain;
-    object-position: center;
-    transform: scale(1.9);
-}
-
-.logo-slot--cit img {
-    padding: 0;
-    object-fit: cover;
-    object-position: center;
-    transform: scale(1.0);
-}
-
-.logo-slot--fundacion img {
-    padding: 0;
-    object-fit: contain;
-    object-position: center;
-    transform: scale(1.5);
-}
-
-.logo-divider {
-    width: 1px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.2);
-    flex-shrink: 0;
+/* El escudo del ITD necesita margen interno para no tocar el borde */
+.logo-slot--itd img {
+    padding: 8px;
 }
 
 /* ── HEADER TITLE ── */
@@ -489,12 +447,12 @@ body {
     }
 
     .logos-strip {
-        gap: 10px 12px;
+        gap: 20px;
     }
 
     .logo-slot {
-        width: 56px;
-        height: 56px;
+        width: 76px;
+        height: 76px;
     }
 
     .logo-divider {
